@@ -38,7 +38,34 @@ def get_user_config(user_id: int):
     return db.get_user_config(user_id)
 
 
+@app.post("/api/create-new-account/")
+def create_new_account(data: base_models.CreateNewAccount):
+    return db.create_new_account(data.user_id, data.name, data.description)
 
+
+@app.get("/api/get-account-list/")
+def get_account_list(user_id: int):
+    return db.get_account_list(user_id)
+
+
+@app.post("/api/add-new-income/")
+def add_new_income(data: base_models.AddNewIncome):
+    return db.add_new_income(data.account_id, data.sum, data.name, data.description, data.category)
+
+
+@app.post("/api/add-new-outcome/")
+def add_new_outcome(data: base_models.AddNewOutcome):
+    return db.add_new_outcome(data.account_id, data.sum, data.name, data.description, data.category)
+
+
+@app.post("/api/add-new-transaction/")
+def add_new_transaction(data: base_models.AddNewTransaction):
+    return db.add_new_transaction(data.from_account_id, data.to_account_id, data.sum, data.description)
+
+
+@app.get("/api/get-user-balance/")
+def get_account_balance(account_id: int):
+    return round(db.get_account_balance(account_id), 2)
 
 
 # example
